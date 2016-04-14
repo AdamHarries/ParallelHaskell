@@ -16,3 +16,13 @@ fixedIO f xs = do
         return xs'
     else
         fixedIO f xs'
+
+fixedN :: Eq a => (Int -> Vector a -> Vector a) -> Vector a -> Vector a
+fixedN f xs = fixedNH f xs 0
+
+fixedNH :: Eq a => (Int -> Vector a -> Vector a) -> Vector a -> Int -> Vector a
+fixedNH f xs n = let xs' = f n xs in 
+    if V.and $ V.map (\(a,b) -> a==b) $ V.zip xs xs' then
+        xs'
+    else
+        fixedNH f xs' (n+1)

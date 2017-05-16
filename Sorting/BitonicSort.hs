@@ -26,7 +26,8 @@ directions len dim = V.generate len (direction dim) where
 
 
 -- apply an iteration of a network sorter to a vector
-ncas :: (Ord a) => V.Vector Direction -> V.Vector Label -> V.Vector a -> V.Vector a
+ncas :: (Ord a) => 
+    V.Vector Direction -> V.Vector Label -> V.Vector a -> V.Vector a
 ncas dirs others vxs = let div = V.zip dirs others in
     V.imap pcas div where
     pcas ix (d, ox) = cas vxs d ix ox
